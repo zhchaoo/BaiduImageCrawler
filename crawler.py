@@ -42,12 +42,14 @@ def get_image_urls(html_content):
 
 #reading parameters
 if (len(sys.argv) < 5):
-    print('Usage: python crawler.py $key_word $dest_folder $num_of_images $num_of_threads')
+    print('Usage: python crawler.py $key_word $dest_folder $num_of_images $num_of_threads [$img_width $img_height]')
     exit()
 key_word = repr(sys.argv[1].encode('UTF-8')).replace('\\x', '%').upper()[2:-1]
 dest_folder = sys.argv[2]
 num_image = eval(sys.argv[3])
 nthread = eval(sys.argv[4])
+img_width = len(sys.argv) > 5 and eval(sys.argv[5]) or 0
+img_height = len(sys.argv) > 6 and eval(sys.argv[6]) or 0
 
 #create and change working directory
 if not os.path.exists(dest_folder):
@@ -61,7 +63,8 @@ while cnt < num_image:
     print("Page %d:"%(pn+1))
     image_urls = []
     try:
-        url = "http://images.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=%s&pn=%d&gsm=0"%(key_word, pn*15)
+        url = "http://images.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=%s&pn=%d&gsm=0&width=%d&height=%d" \
+            %(key_word, pn*15, img_width, img_height)
         html_content = get_html(url)
         temp_urls = get_image_urls(html_content)
         for i in temp_urls:

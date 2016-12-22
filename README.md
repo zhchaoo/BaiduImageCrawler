@@ -7,7 +7,7 @@ This is a multithreaded tool for downloading search results of [Baidu image sear
 
 ### Usage
 ```sh
-$ python crawler.py KEYWORD DEST_FOLDER NUM_OF_IMAGES NUM_OF_THREADS
+$ python crawler.py KEYWORD DEST_FOLDER NUM_OF_IMAGES NUM_OF_THREADS [WIDTH HEIGHT]
 ```
 
 ### Example
